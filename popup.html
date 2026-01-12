@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        .pixel-text {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 8px;
+            /* Pixel fonts are usually better small */
+        }
+
+        body {
+            width: 300px;
+            background: #222;
+            padding: 15px;
+            color: white;
+            font-family: 'Courier New', monospace;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        /* New Forest UI Styles */
+        /* View Toggling */
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .input-group {
+            background: #333;
+            border: 2px solid #000;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .input-group input {
+            background: #222;
+            color: white;
+            font-family: 'Press Start 2P', cursive;
+            border: 1px solid #555;
+            padding: 5px;
+            width: 90%;
+            outline: none;
+            font-size: 8px;
+        }
+
+        .input-group input:focus {
+            border-color: #3498db;
+        }
+
+        .label {
+            font-size: 8px;
+            color: #bdc3c7;
+            margin-bottom: 5px;
+        }
+
+        .info-px {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            margin: 10px 0;
+            color: #f39c12;
+        }
+
+        .action-btn {
+            width: 100%;
+            background: #e74c3c;
+            border: none;
+            border-bottom: 4px solid #c0392b;
+            color: white;
+            padding: 10px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+        .action-btn:active {
+            border-bottom: none;
+            transform: translateY(4px);
+        }
+
+        .drink-btn {
+            background: #3498db;
+            border-bottom: 4px solid #2980b9;
+            font-size: 12px;
+            padding: 15px;
+        }
+
+        .small-btn {
+            background: #555;
+            color: #fff;
+            border: 1px solid #000;
+            padding: 5px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 8px;
+            cursor: pointer;
+            margin-top: 5px;
+            width: 100%;
+        }
+
+        /* Monster Sprite Styles */
+        .monster-container {
+            width: 220px;
+            height: 220px;
+            margin: 0 auto;
+            position: relative;
+            /* Optional: Add a subtle floor shadow? */
+        }
+
+        .monster-sprite {
+            width: 100%;
+            height: 100%;
+
+            /* Dynamic Image set by JS, default here for preview */
+            background-image: url('icons/sand_slime/level_1.png');
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            background-size: contain;
+            /* Fit the whole sprite in the box */
+
+            /* Breathing Animation */
+            animation: breathing 3s ease-in-out infinite;
+
+            /* Filter for better integration? */
+            /* filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5)); */
+            image-rendering: pixelated;
+        }
+
+        @keyframes breathing {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .bar-container {
+            width: 100%;
+            height: 15px;
+            background: #222;
+            border: 2px solid #000;
+            margin-bottom: 10px;
+        }
+
+        .bar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .bar.red {
+            background: #e74c3c;
+        }
+
+        .bar.blue {
+            background: #3498db;
+        }
+
+        .bar.cyan {
+            background: #00cec9;
+        }
+
+        .battle-scene {
+            text-align: center;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stats-row {
+            margin-bottom: 15px;
+        }
+
+        .large-text {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .error-text {
+            color: #e74c3c;
+            font-size: 8px;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .grid-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+        }
+
+        .trophy-card {
+            background: #333;
+            border: 1px solid #555;
+            padding: 5px;
+            text-align: center;
+        }
+
+        /* NEW TROPHY ROOM STYLES */
+        .trophy-row {
+            background: #2a2a2a;
+            border: 2px solid #000;
+            padding: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .trophy-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+
+        .trophy-icons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .level-icon-wrapper {
+            position: relative;
+            width: 30px;
+            height: 30px;
+        }
+
+        .level-icon {
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            image-rendering: pixelated;
+            filter: grayscale(100%) opacity(0.3);
+            transition: all 0.3s;
+        }
+
+        .level-icon.unlocked {
+            filter: none;
+        }
+
+        .win-badge {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            background: #f1c40f;
+            color: #000;
+            font-size: 8px;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #fff;
+            font-family: 'Press Start 2P', cursive;
+            z-index: 2;
+        }
+
+        /* STORE STYLES */
+        .carousel-list {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding-bottom: 15px;
+            /* Space for scrollbar */
+            scrollbar-width: thin;
+            scrollbar-color: #f1c40f #333;
+        }
+
+        .store-card {
+            background: #2a2a2a;
+            border: 2px solid #555;
+            padding: 8px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            min-width: 80px;
+            /* Fixed width for carousel */
+        }
+
+        .store-icon {
+            width: 50px;
+            height: 50px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border: 2px solid #000;
+            background-color: #444;
+            image-rendering: pixelated;
+        }
+
+        .store-btn {
+            background: #f1c40f;
+            color: #000;
+            border: none;
+            padding: 5px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 5px;
+            border-bottom: 2px solid #d35400;
+        }
+
+        .store-btn:active {
+            border-bottom: none;
+            transform: translateY(2px);
+        }
+
+        .store-btn:disabled {
+            background: #7f8c8d;
+            border-bottom: 2px solid #555;
+            cursor: not-allowed;
+        }
+
+        /* MONSTER CHOOSER STYLES */
+        .monster-chooser {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            background: #2a2a2a;
+            border: 2px solid #000;
+            padding: 10px;
+        }
+
+        .chooser-btn {
+            background: #555;
+            border: 2px solid #000;
+            color: white;
+            width: 30px;
+            height: 30px;
+            font-family: 'Press Start 2P', cursive;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .chooser-btn:hover {
+            background: #666;
+        }
+
+        .chooser-preview {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #444;
+            border: 2px solid #777;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-sprite {
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            background-size: 80%;
+            image-rendering: pixelated;
+        }
+
+        .monster-name {
+            font-size: 8px;
+            color: #bdc3c7;
+            text-align: center;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="pixel-text">WATER RPG</div>
+        <div>
+            <button id="store-btn" class="icon-btn">🛒</button>
+            <button id="trophy-btn" class="icon-btn">🏆</button>
+        </div>
+    </div>
+
+    <!-- VIEW: SESSION CONFIG (IDLE) -->
+    <div id="view-config" class="view active">
+        <div class="pixel-text" style="text-align: center; margin-bottom: 20px; color: #44bd32;">START SESSION</div>
+
+        <div class="input-group">
+            <div class="label">WATER GOAL (Liters)</div>
+            <input type="number" id="input-liters" value="1.0" step="0.1" min="1.0" max="3.0">
+        </div>
+
+        <div class="monster-chooser">
+            <button id="btn-prev-monster" class="chooser-btn">&lt;</button>
+            <div style="text-align: center;">
+                <div class="chooser-preview">
+                    <div id="monster-preview-sprite" class="preview-sprite"></div>
+                </div>
+                <div id="monster-name-display" class="monster-name">Slime</div>
+            </div>
+            <button id="btn-next-monster" class="chooser-btn">&gt;</button>
+        </div>
+
+        <div class="input-group">
+            <div class="label">DURATION (Hours)</div>
+            <!-- Hidden input to maintain state compatibility -->
+            <input type="number" id="input-hours" value="4" step="0.5" min="1" style="display: none;">
+
+            <div class="monster-chooser" style="margin-bottom: 0;">
+                <button id="btn-time-minus" class="chooser-btn">-</button>
+                <div id="time-display-text" class="pixel-text" style="font-size: 10px;">4.0 Hours</div>
+                <button id="btn-time-plus" class="chooser-btn">+</button>
+            </div>
+        </div>
+
+        <div class="info-px">
+            <div>Cups: <span id="calc-cups">2</span></div>
+            <div>Monster LVL: <span id="calc-difficulty">1</span></div>
+        </div>
+
+        <button id="btn-start" class="action-btn">⚔️ FIGHT MONSTER</button>
+    </div>
+
+    <!-- VIEW: RUNNING SESSION -->
+    <div id="view-running" class="view">
+        <div class="battle-scene">
+            <div class="monster-container">
+                <div class="monster-sprite"></div>
+            </div>
+            <div id="monster-hp-bar" class="bar-container" style="width: 100%; margin-top: 10px;">
+                <div class="bar red"></div>
+            </div>
+        </div>
+
+        <div class="stats-row">
+            <div class="pixel-text">TIME LEFT</div>
+            <div id="timer-display" class="large-text">29:59</div>
+            <div id="time-bar" class="bar-container">
+                <div class="bar blue"></div>
+            </div>
+        </div>
+
+        <div class="stats-row">
+            <div class="pixel-text">WATER DRANK</div>
+            <div id="water-display" class="large-text">0 / 2 Cups</div>
+            <div id="water-bar" class="bar-container">
+                <div class="bar cyan"></div>
+            </div>
+        </div>
+
+        <button id="btn-drink" class="action-btn drink-btn">🥤 DRINK WATER</button>
+        <div id="rate-limit-msg" class="pixel-text error-text" style="display: none;">Wait! Cooldown active.</div>
+
+        <button id="btn-giveup" class="small-btn">🏳️ GIVE UP</button>
+    </div>
+
+    <!-- VIEW: RESULT (WIN/LOSS) -->
+    <div id="view-result" class="view">
+        <div id="result-title" class="pixel-text" style="font-size: 16px; text-align: center; margin-bottom: 20px;">
+            VICTORY!</div>
+        <div id="result-msg" class="pixel-text" style="text-align: center; color: #aaa; margin-bottom: 20px;">You drank
+            all the water!</div>
+        <button id="btn-return" class="action-btn">RETURN TO CAMP</button>
+    </div>
+
+    <!-- VIEW: TROPHY ROOM -->
+    <div id="view-trophies" class="view">
+        <div class="pixel-text" style="text-align: center; color: #ffd700; margin-bottom: 10px;">🏆 HALL OF FAME 🏆
+        </div>
+        <div id="trophy-list" class="grid-list"></div>
+        <button id="btn-back-trophy" class="small-btn">BACK</button>
+    </div>
+
+    <!-- VIEW: STORE -->
+    <div id="view-store" class="view">
+        <div class="pixel-text" style="text-align: center; color: #f1c40f; margin-bottom: 10px;">💰 MONSTER SHOP 💰
+        </div>
+        <div class="pixel-text" style="text-align: center; color: #fff; margin-bottom: 20px; font-size: 10px;">
+            GOLD: <span id="store-gold-display">0</span>
+        </div>
+
+        <div id="store-list" class="grid-list">
+            <!-- Dynamic Store Items -->
+        </div>
+
+        <button id="btn-back-store" class="small-btn">BACK</button>
+    </div>
+
+    <script type="module" src="popup.js"></script>
+</body>
+
+</html>
