@@ -3,7 +3,7 @@
   "name": "HydroQuest - Water reminder",
   "short_name": "HydroQuest",
   "description": "HydroQuest - Water reminder RPG",
-  "version": "1.0",
+  "version": "1.1.1",
   "permissions": [
     "storage",
     "alarms",
