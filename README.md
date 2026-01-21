@@ -43,7 +43,7 @@
 
 - **Core:** JavaScript (ES6 Modules), HTML5, CSS3.
 - **Chrome APIs:** ```alarms``` for session timing, ```notifications``` for hydration alerts, and ```storage``` for persistent RPG data.
-- **Visuals:** Custom pixel art sprites with CSS-driven "breathing" animations.
+- **Visuals:** Custom pixel art sprites generated with the assistance of AI tools, featuring CSS-driven "breathing" animations.
 
 ## 🛡️ License
 This project is open-source. See the LICENSE file for details.

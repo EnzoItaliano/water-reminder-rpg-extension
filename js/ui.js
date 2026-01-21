@@ -244,7 +244,7 @@ export function renderStore(stats, allMonsters = []) {
     });
 
     // Render 9 Placeholders
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < 3; i++) {
         const placeholder = document.createElement('div');
         placeholder.className = 'store-card';
         placeholder.innerHTML = `
@@ -268,7 +268,7 @@ function createStoreCard(monster, currentGold) {
 
     card.innerHTML = `
         <div class="store-icon" style="background-image: url('icons/${monster.id}/level_1.png');"></div>
-        <div class="pixel-text" style="font-size: 8px;">${monster.name}</div>
+        <div class="pixel-text" style="font-size: 8px; height: 20px; display: flex; align-items: center; justify-content: center;">${monster.name}</div>
         <div class="pixel-text" style="color: #f1c40f; font-size: 8px;">💰 ${cost}</div>
         <button class="store-btn" ${canAfford ? '' : 'disabled'}>
             ${canAfford ? 'BUY' : 'NEED GOLD'}
