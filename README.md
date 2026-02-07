@@ -25,6 +25,8 @@
 
 - **Clean Experience:** Focus on the battle with a clear UI that tracks your progress without intrusive browser filters.
 
+- **Cloud Sync (NEW):** Securely back up your RPG progress to the cloud. Sign in to sync your gold, unlocked monsters, and hard-earned trophies across different devices.
+
 ## 🛠️ Installation
 1. Download or clone this repository.
 
@@ -42,6 +44,7 @@
 **Technical Stack:**
 
 - **Core:** JavaScript (ES6 Modules), HTML5, CSS3.
+- **Backend:** Firebase Authentication for user accounts and Cloud Firestore for secure, real-time data synchronization.
 - **Chrome APIs:** ```alarms``` for session timing, ```notifications``` for hydration alerts, and ```storage``` for persistent RPG data.
 - **Visuals:** Custom pixel art sprites generated with the assistance of AI tools, featuring CSS-driven "breathing" animations.
 
