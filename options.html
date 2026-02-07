@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HydroQuest Settings</title>
+    <link rel="stylesheet" href="css/options.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HydroQuest Settings</h1>
+            <p class="subtitle">Manage your journey</p>
+        </header>
+
+        <main>
+            <!-- Login Section -->
+            <section id="auth-section" class="card">
+                <h2>Cloud Sync</h2>
+                <div id="auth-forms">
+                    <input type="email" id="email" placeholder="Email" />
+                    <input type="password" id="password" placeholder="Password" />
+                    <div class="auth-buttons">
+                        <button id="btn-login" class="btn primary">Login</button>
+                        <button id="btn-signup" class="btn secondary">Sign Up</button>
+                    </div>
+                    <p id="auth-status"></p>
+                </div>
+                <div id="user-profile" style="display: none;">
+                    <p>Logged in as: <span id="user-email"></span></p>
+                    <button id="btn-logout" class="btn danger">Logout</button>
+                </div>
+            </section>
+
+            <!-- Sync Section (Hidden until logged in) -->
+            <section id="sync-section" class="card" style="display: none;">
+                <h2>Data Sync</h2>
+                <p>Merge your trophies and unlocked monsters with the cloud.</p>
+                <div class="sync-controls">
+                    <button id="btn-sync" class="btn success">Sync Now ☁️</button>
+                    <span id="sync-status"></span>
+                </div>
+            </section>
+
+            <!-- Bank Section (Hidden until logged in) -->
+            <section id="bank-section" class="card" style="display: none;">
+                <h2>Gold Bank 🏦</h2>
+                <p>Safe deposit for your hard-earned gold.</p>
+                
+                <div class="bank-display">
+                    <div class="balance-box">
+                        <span class="label">Local Wallet</span>
+                        <span class="value" id="local-gold">0</span> <span class="coin">💰</span>
+                    </div>
+                    <div class="arrow">⇄</div>
+                    <div class="balance-box bank">
+                        <span class="label">Cloud Bank</span>
+                        <span class="value" id="bank-gold">0</span> <span class="coin">💰</span>
+                    </div>
+                </div>
+
+                <div class="bank-controls">
+                    <div class="bank-action">
+                        <input type="number" id="deposit-amount" placeholder="Amount" min="1" />
+                        <button id="btn-deposit" class="btn primary">Deposit ➤</button>
+                    </div>
+                    <div class="bank-action">
+                        <input type="number" id="withdraw-amount" placeholder="Amount" min="1" />
+                        <button id="btn-withdraw" class="btn secondary">➤ Withdraw</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card danger-zone">
+                <h2>Danger Zone</h2>
+                <button id="btn-reset" class="btn danger small">Reset Local Data</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>HydroQuest v1.1.2</p>
+        </footer>
+    </div>
+    <script type="module" src="js/options.js"></script>
+</body>
+</html>

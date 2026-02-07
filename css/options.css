@@ -1,0 +1,174 @@
+:root {
+    --bg-color: #2c3e50;
+    --card-bg: #34495e;
+    --text-color: #ecf0f1;
+    --primary: #2ecc71;
+    --primary-hover: #27ae60;
+    --secondary: #3498db;
+    --secondary-hover: #2980b9;
+    --danger: #e74c3c;
+    --danger-hover: #c0392b;
+    --gold: #f1c40f;
+}
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 24px;
+    color: var(--primary);
+    text-shadow: 2px 2px 0 #000;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 10px;
+    color: #95a5a6;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 4px solid #000;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 4px 4px 0 #000;
+}
+
+h2 {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 10px;
+}
+
+input {
+    font-family: 'Press Start 2P', cursive;
+    background: #2c3e50;
+    border: 2px solid #000;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    font-size: 10px;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn {
+    font-family: 'Press Start 2P', cursive;
+    border: 2px solid #000;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 10px;
+    flex: 1;
+    color: white;
+    box-shadow: 2px 2px 0 #000;
+    transition: transform 0.1s;
+}
+
+.btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}
+
+.primary { background: var(--primary); }
+.primary:hover { background: var(--primary-hover); }
+
+.secondary { background: var(--secondary); }
+.secondary:hover { background: var(--secondary-hover); }
+
+.danger { background: var(--danger); }
+.danger:hover { background: var(--danger-hover); }
+
+.success { background: #f1c40f; color: black; }
+
+.small { font-size: 8px; padding: 5px 10px; width: auto; flex: none; }
+
+/* Bank Layout */
+.bank-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2c3e50;
+    padding: 15px;
+    border: 2px solid #000;
+    margin-bottom: 20px;
+}
+
+.balance-box {
+    text-align: center;
+}
+
+.balance-box .label {
+    display: block;
+    font-size: 8px;
+    color: #95a5a6;
+    margin-bottom: 5px;
+}
+
+.balance-box .value {
+    font-size: 14px;
+    color: var(--gold);
+}
+
+.arrow {
+    font-size: 20px;
+    color: #7f8c8d;
+}
+
+.bank-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.bank-action {
+    display: flex;
+    gap: 10px;
+}
+
+.bank-action input {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.bank-action button {
+    flex: 0 0 100px;
+}
+
+#auth-status {
+    font-size: 8px;
+    margin-top: 10px;
+    height: 10px;
+}
+
+footer {
+    text-align: center;
+    font-size: 8px;
+    color: #7f8c8d;
+    margin-top: 40px;
+}

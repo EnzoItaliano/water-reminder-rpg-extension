@@ -36,6 +36,9 @@ function handleSessionTimeout() {
       session.isActive = false;
       session.status = 'lost';
 
+      // Clear alarms
+      chrome.alarms.clear("drinkReminder");
+
       // Save and Notify
       chrome.storage.local.set({ userStats: stats }, () => {
         chrome.notifications.create("session-timeout", {
