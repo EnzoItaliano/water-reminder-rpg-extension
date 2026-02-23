@@ -107,6 +107,11 @@ function setupListeners() {
         });
     });
 
+    // OPTIONS PAGE
+    document.getElementById('options-btn')?.addEventListener('click', () => {
+        chrome.runtime.openOptionsPage();
+    });
+
     // STORE
     document.getElementById('store-btn')?.addEventListener('click', () => {
         switchView('view-store');
