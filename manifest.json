@@ -9,6 +9,14 @@
     "alarms",
     "notifications"
   ],
+  "host_permissions": [
+    "https://*.firebaseio.com/*",
+    "https://*.googleapis.com/*",
+    "https://*.firebaseapp.com/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline';"
+  },
   "background": {
     "service_worker": "background.js",
     "type": "module"
